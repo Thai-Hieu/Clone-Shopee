@@ -1,0 +1,292 @@
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Roboto", Arial, sans-serif;
+    background-color: #f5f5f5;
+    color: #222;
+    line-height: 1.5;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+button {
+    cursor: pointer;
+    border: none;
+    background: none;
+}
+
+ul {
+    list-style: none;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+/* Shopee Colors */
+:root {
+    --primary-color: #ee4d2d;
+    --secondary-color: #f53d2d;
+    --text-color: #222;
+    --light-gray: #f5f5f5;
+    --medium-gray: #e8e8e8;
+    --dark-gray: #757575;
+    --white: #fff;
+    --black: #000;
+    --border-color: #e8e8e8;
+}
+
+/* Header Styles */
+.shopee-header {
+    background-color: var(--white);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.top-header {
+    background: linear-gradient(to right, var(--secondary-color), var(--primary-color));
+    color: var(--white);
+    padding: 8px 0;
+    font-size: 13px;
+}
+
+.top-header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.top-header-left,
+.top-header-right {
+    display: flex;
+    align-items: center;
+}
+
+.top-link {
+    margin-right: 15px;
+    color: var(--white);
+    display: flex;
+    align-items: center;
+}
+
+.top-link i {
+    margin-right: 5px;
+}
+
+.social-icons {
+    margin-left: 5px;
+}
+
+.social-icons i {
+    margin-left: 8px;
+}
+/* Products Grid */
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 16px;
+    padding: 16px;
+}
+
+@media (max-width: 768px) {
+    .products-grid {
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+        gap: 8px;
+        padding: 8px;
+    }
+}
+
+/* Featured Products Section */
+.featured-products {
+    margin: 24px 0;
+}
+
+.featured-products h2 {
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: 16px;
+    padding: 0 16px;
+}
+
+/* Flash Sale Section */
+.flash-sale {
+    margin: 24px 0;
+}
+
+.flash-sale-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 16px;
+    margin-bottom: 16px;
+}
+
+.flash-sale-header h2 {
+    font-size: 20px;
+    font-weight: 500;
+    color: #ee4d2d;
+}
+
+.countdown {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+}
+
+.countdown-time {
+    background: #ee4d2d;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-weight: 500;
+}
+
+/* Loading State */
+.loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 200px;
+    font-size: 16px;
+    color: #666;
+}
+
+.banner-container {
+    width: 100%;
+    /* Các thuộc tính khác của banner container */
+}
+.banner-section {
+    position: relative;
+    overflow: hidden; /* Đảm bảo banner không tràn ra ngoài */
+    height: 427px;
+}
+.banner-slider {
+    display: flex; /* Sử dụng flexbox để xếp các slide ngang hàng */
+    transition: transform 0.5s ease-in-out; /* Tạo hiệu ứng trượt mượt mà */
+}
+
+.banner-slide {
+    flex: 0 0 100%; /* Mỗi slide chiếm 100% chiều rộng */
+    width: 100%;
+    /* Các thuộc tính khác của banner slide */
+}
+
+.banner-slide img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    display: block; /* Loại bỏ khoảng trắng dưới ảnh */
+}
+
+.banner-controls {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    transform: translateY(-50%);
+    padding: 0 10px;
+}
+
+.banner-controls button {
+    background-color: rgba(0, 0, 0, 0.5); /* Màu nền cho dễ nhìn */
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.banner-controls button:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.categories-section {
+    padding: 20px 0;
+    background-color: #fff;
+}
+
+.categories-section h2 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+    padding: 0 15px;
+}
+
+.categories-grid {
+    display: flex;
+    flex-wrap: wrap;
+    overflow-x: auto; /* Tạo thanh cuộn ngang khi quá nhiều danh mục */
+    padding: 0 15px;
+    gap: 10px;
+}
+
+.category-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    color: #333;
+    width: 80px;
+    flex-shrink: 0; /* Ngăn các item co lại */
+}
+
+.category-item img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 5px;
+    border: 1px solid #ddd;
+}
+
+.category-item span {
+    font-size: 0.8rem;
+    text-align: center;
+    word-break: break-word; /* Chữ dài tự động xuống dòng */
+}
+
+/* Responsive adjustments */
+@media (max-width: 46.1875em) {
+    .categories-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+        overflow-x: hidden;
+    }
+
+    .category-item {
+        width: auto;
+    }
+
+    .banner-section {
+        position: relative;
+        overflow: hidden; /* Đảm bảo banner không tràn ra ngoài*/
+        height: 142px;
+    }
+}
+
+@media (min-width: 46.25em) and (max-width: 63.9375em) {
+    .banner-section {
+        position: relative;
+        overflow: hidden; /* Đảm bảo banner không tràn ra ngoài*/
+        height: 295px;
+    }
+}
+
+/* @media (max-width: 64em) {
+    
+} */
