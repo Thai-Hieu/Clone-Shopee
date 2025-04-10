@@ -169,7 +169,7 @@
 
 .item-variation {
     font-size: 12px;
-    color: #757575;
+    color: #b91212;
 }
 
 .item-price {
@@ -292,11 +292,21 @@
 
     .remove-button {
         position: absolute;
-        top: 16px;
+        top: 42%;
         right: 16px;
+        transform: translateY(-42%);
+        font-size: 18px;
     }
     .close-button {
         font-size: 42px;
+    }
+    .item-name-section {
+        gap: 5px;
+    }
+    .item-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
     }
 }
 .empty-cart {

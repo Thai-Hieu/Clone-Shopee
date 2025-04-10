@@ -97,18 +97,18 @@
 
 .sold {
     color: #666;
-    font-size: 14px;
+    font-size: 16px;
 }
 
-.product-price {
+.product-price-detail {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 10px;
 }
 
-.current-price {
-    font-size: 20px;
+.current-price-detail {
+    font-size: 25px;
     color: #ee4d2d;
     font-weight: 500;
 }
@@ -267,7 +267,6 @@
     .product-info {
         padding: 10px;
     }
-
     .action-buttons {
         position: fixed;
         bottom: 0;
@@ -295,6 +294,18 @@
 
     .product-stats {
         justify-content: space-between;
+    }
+
+    .current-price-detail {
+        color: #ee4d2d;
+        font-size: 25px;
+        font-weight: 500;
+    }
+
+    .original-price-detail {
+        font-size: 20px;
+        color: #999;
+        text-decoration: line-through;
     }
 }
 

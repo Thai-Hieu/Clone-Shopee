@@ -188,12 +188,12 @@ const ProductDetail = ({ onAddToCart }) => {
                         </div>
                         <div className="sold">{product.sold} đã bán</div>
                     </div>
-                    <div className="product-price">
-                        <div className="current-price">
+                    <div className="product-price-detail">
+                        <div className="current-price-detail">
                             {formatPrice(product.price)}
                         </div>
                         {product.originalPrice > product.price && (
-                            <div className="original-price">
+                            <div className="original-price-detail">
                                 {formatPrice(product.originalPrice)}
                             </div>
                         )}

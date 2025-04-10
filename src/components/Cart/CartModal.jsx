@@ -102,44 +102,46 @@ const CartModal = ({ cart, setCart, onClose }) => {
                                                     Phân loại: {item.variation}
                                                 </div>
                                             )}
-                                            <div className="item-price">
-                                                ₫{item.price.toLocaleString()}
+                                            <div className="item-wrapper">
+                                                <div className="item-price">
+                                                    ₫{item.price.toLocaleString()}
+                                                </div>
+                                                <div className="item-quantity">
+                                                    <button
+                                                        className="quantity-btn"
+                                                        onClick={() =>
+                                                            updateQuantity(
+                                                                item.id,
+                                                                item.quantity - 1
+                                                            )
+                                                        }
+                                                        disabled={isProcessing}
+                                                    >
+                                                        -
+                                                    </button>
+                                                    <span>{item.quantity}</span>
+                                                    <button
+                                                        className="quantity-btn"
+                                                        onClick={() =>
+                                                            updateQuantity(
+                                                                item.id,
+                                                                item.quantity + 1
+                                                            )
+                                                        }
+                                                        disabled={isProcessing}
+                                                    >
+                                                        +
+                                                    </button>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div className="item-quantity">
-                                        <button
-                                            className="quantity-btn"
-                                            onClick={() =>
-                                                updateQuantity(
-                                                    item.id,
-                                                    item.quantity - 1
-                                                )
-                                            }
-                                            disabled={isProcessing}
-                                        >
-                                            -
-                                        </button>
-                                        <span>{item.quantity}</span>
-                                        <button
-                                            className="quantity-btn"
-                                            onClick={() =>
-                                                updateQuantity(
-                                                    item.id,
-                                                    item.quantity + 1
-                                                )
-                                            }
-                                            disabled={isProcessing}
-                                        >
-                                            +
-                                        </button>
                                     </div>
                                     <button
                                         className="remove-button"
                                         onClick={() => removeFromCart(item.id)}
                                         disabled={isProcessing}
                                     >
-                                        Xóa
+                                        <i class="fas fa-trash"></i>
                                     </button>
                                 </div>
                             </div>
