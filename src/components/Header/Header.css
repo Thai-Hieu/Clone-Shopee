@@ -301,6 +301,7 @@
         transform: translateY(-50%);
         font-size: 24px;
         color: #fff;
+        background-color: transparent;
     }
     .logo img {
         display: none;

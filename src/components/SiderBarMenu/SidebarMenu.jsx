@@ -62,32 +62,22 @@ const SidebarMenu = ({
                         </Link>
                     </li>
                     <li>
-                        <Link to="/flash-sale" onClick={handleLinkClick}>
-                            Flash Sale
+                        <Link to="/seller-channel" onClick={handleLinkClick}>
+                            Kênh người bán
                         </Link>
                     </li>
                     <li>
-                        <Link to="/voucher" onClick={handleLinkClick}>
-                            Voucher
+                        <Link to="/download" onClick={handleLinkClick}>
+                            Tải xuống
                         </Link>
                     </li>
                     <li>
-                        <Link to="/categories" onClick={handleLinkClick}>
-                            Danh mục
-                        </Link>
-                    </li>
-                    <li>
-                        <Link to="/promotions" onClick={handleLinkClick}>
-                            Khuyến mãi
-                        </Link>
-                    </li>
-                    <li>
-                        <Link to="/notifications" onClick={handleLinkClick}>
+                        <Link to="/notification" onClick={handleLinkClick}>
                             Thông báo
                         </Link>
                     </li>
                     <li>
-                        <Link to="/help" onClick={handleLinkClick}>
+                        <Link to="/support" onClick={handleLinkClick}>
                             Hỗ trợ
                         </Link>
                     </li>
