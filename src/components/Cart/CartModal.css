@@ -256,7 +256,7 @@
 
 .checkout-button {
     width: 100%;
-    padding: 10px;
+    padding: 15px;
     background-color: #ee4d2d;
     color: white;
     border: none;
@@ -290,8 +290,10 @@
     }
 
     .item-quantity {
+        display: flex;
         margin-top: 8px;
-        margin-right: 0;
+        margin-right: 26px;
+        margin-left: 76px;
     }
 
     .remove-button {
@@ -305,7 +307,7 @@
         font-size: 42px;
     }
     .item-name-section {
-        gap: 5px;
+        gap: 10px;
     }
     .item-wrapper {
         display: flex;
@@ -313,6 +315,7 @@
         justify-content: space-between;
     }
 }
+
 .empty-cart {
     text-align: center;
     padding: 20px;
