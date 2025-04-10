@@ -275,7 +275,11 @@
     align-items: center;
     justify-content: center;
 }
-
+.item-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
 @media (max-width: 768px) {
     .cart-modal {
         width: 100%;
