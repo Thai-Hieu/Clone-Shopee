@@ -1,0 +1,112 @@
+.support-container {
+    padding: 24px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background: #fafafa;
+    max-width: 500px;
+    margin: 20px auto;
+}
+
+.support-title {
+    font-size: 1.5rem;
+    margin-bottom: 8px;
+    color: #333;
+}
+
+.support-desc {
+    font-size: 1rem;
+    margin-bottom: 16px;
+    color: #555;
+}
+
+.support-list {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 20px;
+}
+
+.support-list li {
+    margin-bottom: 10px;
+    font-size: 1rem;
+}
+
+.chat-btn {
+    padding: 8px 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.875rem;
+}
+
+.chat-btn:hover {
+    background-color: #0056b3;
+}
+
+.link {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.link:hover {
+    text-decoration: underline;
+}
+
+.social-support h3 {
+    font-size: 1.25rem;
+    margin-bottom: 12px;
+    color: #333;
+}
+
+.social-icons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.social-icon {
+    padding: 8px 16px;
+    border-radius: 8px;
+    text-decoration: none;
+    color: white;
+    font-size: 0.875rem;
+    transition: all 0.3s ease;
+}
+
+.social-icon.facebook {
+    background-color: #3b5998;
+}
+
+.social-icon.zalo {
+    background-color: #0088ff;
+}
+
+.social-icon.messenger {
+    background-color: #00b2ff;
+}
+
+.social-icon.instagram {
+    background-color: #e1306c;
+}
+
+.social-icon:hover {
+    opacity: 0.85;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .support-container {
+        padding: 16px;
+    }
+
+    .social-icons {
+        flex-direction: column;
+    }
+
+    .chat-btn,
+    .social-icon {
+        width: 100%;
+        text-align: center;
+    }
+}

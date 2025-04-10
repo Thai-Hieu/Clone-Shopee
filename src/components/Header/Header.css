@@ -52,7 +52,9 @@
     text-decoration: none;
     margin-left: 8px;
 }
-
+.social-link img {
+    margin-top: 6px;
+}
 .social-link:hover {
     opacity: 0.8;
 }
@@ -228,11 +230,11 @@
 
 .language-dropdown .dropdown-menu li button {
     cursor: pointer;
-    color: #fff;
+    color: #985656;
 }
 
 .language-dropdown .dropdown-menu li button:hover {
-    color: #cfcaca;
+    color: #ee4d2d;
 }
 
 .language-dropdown:hover .dropdown-menu {

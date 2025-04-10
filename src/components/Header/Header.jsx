@@ -115,7 +115,7 @@ const Header = ({ cart, setCart }) => {
                 <div className="header-top">
                     <div className="header-top-container">
                         <div className="header-top-left">
-                            <Link to="/seller" className="header-link">
+                            <Link to="/seller-channel" className="header-link">
                                 <i className="fas fa-store"></i>
                                 Kênh Người Bán
                             </Link>
@@ -125,21 +125,32 @@ const Header = ({ cart, setCart }) => {
                             </Link>
                             <div className="header-link">
                                 <span>Kết nối</span>
-                                <a href="#" className="social-link">
+                                <a href="https://facebook.com" className="social-link">
                                     <i className="fab fa-facebook"></i>
                                 </a>
-                                <a href="#" className="social-link">
+                                <a href="https://instagram.com" className="social-link">
                                     <i className="fab fa-instagram"></i>
+                                </a>
+                                <a href="https://zalo.me" className="social-link">
+                                    <img
+                                        src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Icon_of_Zalo.svg/1024px-Icon_of_Zalo.svg.png"
+                                        alt="Zalo"
+                                        width="13"
+                                        height="13"
+                                    />
+                                </a>
+                                <a href="https://m.me" className="social-link">
+                                    <i class="fab fa-facebook-messenger"></i>
                                 </a>
                             </div>
                         </div>
 
                         <div className="header-top-right">
-                            <Link to="/notifications" className="header-link">
+                            <Link to="/notification" className="header-link">
                                 <i className="far fa-bell"></i>
                                 Thông Báo
                             </Link>
-                            <Link to="/help" className="header-link">
+                            <Link to="/support" className="header-link">
                                 <i className="far fa-question-circle"></i>
                                 Hỗ Trợ
                             </Link>

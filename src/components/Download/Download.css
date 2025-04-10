@@ -1,0 +1,38 @@
+.download-page {
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.download-content {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.qr-code {
+    width: 150px;
+    margin-bottom: 20px;
+}
+
+.download-links {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.download-links a {
+    display: inline-block;
+    margin: 10px;
+}
+
+.download-links img {
+    width: 120px;
+    height: auto;
+    transition: transform 0.3s;
+}
+
+.download-links img:hover {
+    transform: scale(1.1);
+}

@@ -10,7 +10,11 @@ import LoginModal from "./components/FormLogin/LoginModal";
 import RegisterModal from "./components/FormRegister/RegisterModal";
 import SidebarMenu from "./components/SiderBarMenu/SidebarMenu";
 import MyOrders from "./components/MyOrder/MyOrders";
+import SellerChannel from "./components/SellerChannel/SellerChannel";
 import Profile from "./components/Profile/Profile";
+import Download from "./components/Download/Download";
+import Notification from "./components/Notification/Notification";
+import Support from "./components/Support/Support";
 import "./App.css";
 import "./components/Notification.css";
 
@@ -72,6 +76,10 @@ function App() {
                     <Route path="/register" element={<RegisterModal />} />
                     <Route path="/my-orders" element={<MyOrders />} />
                     <Route path="/profile" element={<Profile />} />
+                    <Route path="/download" element={<Download />} />
+                    <Route path="/notification" element={<Notification />} />
+                    <Route path="/support" element={<Support />} />
+                    <Route path="/seller-channel" element={<SellerChannel />} />
                 </Routes>
             </main>
             <Footer />
