@@ -127,7 +127,21 @@
         opacity: 1;
     }
 }
+.error-message {
+    color: #e94560;
+    font-size: 0.9rem;
+    margin-top: 8px;
+    opacity: 0;
+    transform: translateY(-5px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    min-height: 1.2em; /* đảm bảo giữ chỗ dù chưa có lỗi */
+}
 
+/* Khi có lỗi thì thêm class "show" */
+.error-message.show {
+    opacity: 1;
+    transform: translateY(0);
+}
 @media (max-width: 768px) {
     .modal-content {
         margin: 20px;

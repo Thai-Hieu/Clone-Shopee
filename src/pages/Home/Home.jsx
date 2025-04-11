@@ -11,6 +11,7 @@ const Home = () => {
     const [currentSlide, setCurrentSlide] = useState(0);
     const [flashSaleEndTime, setFlashSaleEndTime] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [apiError, setApiError] = useState(false);
 
     // Banner images
     const bannerImages = [
@@ -78,10 +79,12 @@ const Home = () => {
                 }));
 
                 setProducts(transformedProducts);
+                setApiError(false); // không lỗi
             } catch (error) {
                 console.error("Error fetching products:", error);
                 // Fallback to mock data if API fails
                 generateMockProducts();
+                setApiError(true); // báo lỗi
             } finally {
                 setLoading(false);
             }
@@ -154,9 +157,17 @@ const Home = () => {
     };
 
     if (loading) {
-        return <div className="loading">Loading...</div>;
+        return (
+            <div className="loading">
+                <div className="spinner"></div>
+                <h2>Loading...</h2>
+            </div>
+        );
     }
-
+    // Call Erorr API
+    if (apiError) {
+        return <NotFound />;
+    }
     const nextSlide = () => {
         setCurrentSlide((prev) => (prev + 1) % bannerImages.length);
     };

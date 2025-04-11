@@ -4,7 +4,7 @@ import "./Notification.css";
 const Notification = () => {
     const [notifications, setNotifications] = useState([]);
     const [loading, setLoading] = useState(true);
-
+    const [apiError, setApiError] = useState(false);
     // Thay API thật vào đây:
     const API_URL = "https://67e69f186530dbd31110c912.mockapi.io/notifications";
 
@@ -14,10 +14,12 @@ const Notification = () => {
             .then((data) => {
                 setNotifications(data);
                 setLoading(false);
+                setApiError(false); // không lỗi
             })
             .catch((error) => {
                 console.error("Lỗi khi fetch thông báo:", error);
                 setLoading(false);
+                setApiError(true); // báo lỗi
             });
     }, []);
 
@@ -37,12 +39,18 @@ const Notification = () => {
             method: "DELETE",
         }).catch((err) => console.error("Lỗi khi xóa thông báo:", err));
     };
-
+    // Call Erorr API
+    if (apiError) {
+        return <NotFound />;
+    }
     return (
         <div className="notification-center">
             <h2>🔔 Thông báo của bạn</h2>
             {loading ? (
-                <p>Đang tải...</p>
+                <div className="loading">
+                    <div className="spinner"></div>
+                    <h2>Loading...</h2>
+                </div>
             ) : notifications.length === 0 ? (
                 <p>Không có thông báo nào.</p>
             ) : (

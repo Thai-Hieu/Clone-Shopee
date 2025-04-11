@@ -138,9 +138,9 @@ const ProductDetail = ({ onAddToCart }) => {
 
     if (loading) {
         return (
-            <div className="loading-container">
-                <div className="loading-spinner"></div>
-                <p>Đang tải thông tin sản phẩm...</p>
+            <div className="loading">
+                <div className="spinner"></div>
+                <h2>Loading...</h2>
             </div>
         );
     }

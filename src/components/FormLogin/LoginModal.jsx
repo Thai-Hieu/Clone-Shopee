@@ -4,7 +4,8 @@ import "./LoginModal.css";
 const LoginModal = ({ onClose, onLogin, onSwitchToRegister, onSuccess }) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [error, setError] = useState("");
+    const [errors, setErrors] = useState({});
+    const [touched, setTouched] = useState({});
     const [isLoading, setIsLoading] = useState(false);
 
     const validateEmail = (email) => {
@@ -12,33 +13,65 @@ const LoginModal = ({ onClose, onLogin, onSwitchToRegister, onSuccess }) => {
         return re.test(email);
     };
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        setError("");
+    const validateFields = () => {
+        const newErrors = {};
 
-        if (!email || !password) {
-            setError("Vui lòng điền đầy đủ thông tin");
-            return;
+        if (!email) {
+            newErrors.email = "Vui lòng nhập email";
+        } else if (!validateEmail(email)) {
+            newErrors.email = "Email không hợp lệ";
         }
 
-        if (!validateEmail(email)) {
-            setError("Email không hợp lệ");
+        if (!password) {
+            newErrors.password = "Vui lòng nhập mật khẩu";
+        }
+
+        return newErrors;
+    };
+
+    const handleBlur = (field) => {
+        setTouched((prev) => ({ ...prev, [field]: true }));
+
+        const newErrors = validateFields();
+        setErrors(newErrors);
+    };
+
+    const handleFocus = (field) => {
+        setErrors((prevErrors) => ({ ...prevErrors, [field]: "" }));
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setTouched({
+            email: true,
+            password: true,
+        });
+        setErrors({});
+        const newErrors = validateFields();
+
+        if (Object.keys(newErrors).length > 0) {
+            setErrors(newErrors);
             return;
         }
 
         try {
             setIsLoading(true);
-            // Giả lập thời gian xử lý
             await new Promise((resolve) => setTimeout(resolve, 500));
-            const result = onLogin({ email, name: email.split("@")[0], password });
+
+            const result = await onLogin({
+                email,
+                name: email.split("@")[0],
+                password,
+            });
+
             if (result?.success) {
-                onSuccess?.(); // 👈 gọi hàm onSuccess nếu đăng nhập thành công
+                onSuccess?.();
             } else {
-                setError("Sai thông tin đăng nhập");
+                setErrors({ global: "Sai thông tin đăng nhập" });
             }
         } catch (err) {
-            setError("Đăng nhập thất bại. Vui lòng thử lại.");
             console.error("Login error:", err);
+            setErrors({ global: "Đăng nhập thất bại. Vui lòng thử lại." });
         } finally {
             setIsLoading(false);
         }
@@ -53,7 +86,7 @@ const LoginModal = ({ onClose, onLogin, onSwitchToRegister, onSuccess }) => {
                         <i className="fas fa-times"></i>
                     </button>
                 </div>
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit} noValidate>
                     <div className="form-group">
                         <label htmlFor="email">Email</label>
                         <input
@@ -61,10 +94,22 @@ const LoginModal = ({ onClose, onLogin, onSwitchToRegister, onSuccess }) => {
                             id="email"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
+                            onBlur={() => handleBlur("email")}
+                            onFocus={() => handleFocus("email")}
                             placeholder="Nhập email của bạn"
                             disabled={isLoading}
                         />
+                        {touched.email && (
+                            <div
+                                className={`error-message ${
+                                    errors.email ? "show" : ""
+                                }`}
+                            >
+                                {errors.email}
+                            </div>
+                        )}
                     </div>
+
                     <div className="form-group">
                         <label htmlFor="password">Mật khẩu</label>
                         <input
@@ -72,11 +117,26 @@ const LoginModal = ({ onClose, onLogin, onSwitchToRegister, onSuccess }) => {
                             id="password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
+                            onBlur={() => handleBlur("password")}
+                            onFocus={() => handleFocus("password")}
                             placeholder="Nhập mật khẩu"
                             disabled={isLoading}
                         />
+                        {touched.password && (
+                            <div
+                                className={`error-message ${
+                                    errors.password ? "show" : ""
+                                }`}
+                            >
+                                {errors.password}
+                            </div>
+                        )}
                     </div>
-                    {error && <div className="error-message">{error}</div>}
+
+                    {errors.global && (
+                        <div className="error-message show">{errors.global}</div>
+                    )}
+
                     <button
                         type="submit"
                         className="submit-button"
@@ -85,6 +145,7 @@ const LoginModal = ({ onClose, onLogin, onSwitchToRegister, onSuccess }) => {
                         {isLoading ? "Đang xử lý..." : "Đăng nhập"}
                     </button>
                 </form>
+
                 <div className="modal-footer">
                     <p>
                         Chưa có tài khoản?{" "}

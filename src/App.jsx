@@ -15,6 +15,7 @@ import Profile from "./components/Profile/Profile";
 import Download from "./components/Download/Download";
 import Notification from "./components/Notification/Notification";
 import Support from "./components/Support/Support";
+import NotFound from "./components/NotFound/NotFound";
 import "./App.css";
 import "./components/Notification.css";
 
@@ -80,6 +81,7 @@ function App() {
                     <Route path="/notification" element={<Notification />} />
                     <Route path="/support" element={<Support />} />
                     <Route path="/seller-channel" element={<SellerChannel />} />
+                    <Route path="*" element={<NotFound />} />
                 </Routes>
             </main>
             <Footer />

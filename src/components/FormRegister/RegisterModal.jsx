@@ -6,51 +6,83 @@ const RegisterModal = ({ onClose, onRegister, onSwitchToLogin, onSuccess }) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
-    const [error, setError] = useState("");
+    const [errors, setErrors] = useState({});
+    const [touched, setTouched] = useState({});
     const [isLoading, setIsLoading] = useState(false);
 
-    const validateEmail = (email) => {
-        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return re.test(email);
+    const validateEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+    const validateFields = () => {
+        const newErrors = {};
+
+        if (!name) newErrors.name = "Vui lòng nhập họ tên.";
+
+        if (!email) {
+            newErrors.email = "Vui lòng nhập email.";
+        } else if (!validateEmail(email)) {
+            newErrors.email = "Email không hợp lệ.";
+        }
+
+        if (!password) {
+            newErrors.password = "Vui lòng nhập mật khẩu.";
+        } else if (password.length < 6) {
+            newErrors.password = "Mật khẩu phải từ 6 ký tự.";
+        }
+
+        if (!confirmPassword) {
+            newErrors.confirmPassword = "Vui lòng xác nhận mật khẩu.";
+        } else if (confirmPassword !== password) {
+            newErrors.confirmPassword = "Mật khẩu không khớp.";
+        }
+
+        return newErrors;
+    };
+
+    const handleBlur = (field) => {
+        setTouched((prev) => ({ ...prev, [field]: true }));
+        const newErrors = validateFields();
+        setErrors(newErrors);
+    };
+
+    const handleFocus = (field) => {
+        setErrors((prevErrors) => ({ ...prevErrors, [field]: "" }));
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setError("");
 
-        if (!name || !email || !password || !confirmPassword) {
-            setError("Vui lòng điền đầy đủ thông tin");
-            return;
-        }
+        // Đánh dấu tất cả trường đã "chạm"
+        setTouched({
+            name: true,
+            email: true,
+            password: true,
+            confirmPassword: true,
+        });
 
-        if (!validateEmail(email)) {
-            setError("Email không hợp lệ");
-            return;
-        }
+        const newErrors = validateFields();
+        setErrors(newErrors);
 
-        if (password.length < 6) {
-            setError("Mật khẩu phải có ít nhất 6 ký tự");
-            return;
-        }
-
-        if (password !== confirmPassword) {
-            setError("Mật khẩu không khớp");
-            return;
-        }
+        if (Object.keys(newErrors).length > 0) return;
 
         try {
             setIsLoading(true);
-            // Giả lập thời gian xử lý
-            await new Promise((resolve) => setTimeout(resolve, 500));
+            await new Promise((res) => setTimeout(res, 500));
             const result = await onRegister({ name, email, password });
 
-            // 👇 gọi onSuccess nếu đăng ký thành công
             if (result?.success) {
                 onSuccess?.();
+            } else {
+                setErrors((prev) => ({
+                    ...prev,
+                    global: "Đăng ký thất bại. Vui lòng thử lại.",
+                }));
             }
         } catch (err) {
-            setError("Đăng ký thất bại. Vui lòng thử lại.");
-            console.error("Registration error:", err);
+            console.error(err);
+            setErrors((prev) => ({
+                ...prev,
+                global: "Lỗi không xác định. Vui lòng thử lại.",
+            }));
         } finally {
             setIsLoading(false);
         }
@@ -65,7 +97,7 @@ const RegisterModal = ({ onClose, onRegister, onSwitchToLogin, onSuccess }) => {
                         <i className="fas fa-times"></i>
                     </button>
                 </div>
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit} noValidate>
                     <div className="form-group">
                         <label htmlFor="name">Họ tên</label>
                         <input
@@ -73,10 +105,20 @@ const RegisterModal = ({ onClose, onRegister, onSwitchToLogin, onSuccess }) => {
                             id="name"
                             value={name}
                             onChange={(e) => setName(e.target.value)}
+                            onBlur={() => handleBlur("name")}
+                            onFocus={() => handleFocus("name")}
                             placeholder="Nhập họ tên của bạn"
                             disabled={isLoading}
                         />
+                        {touched.name && (
+                            <div
+                                className={`error-message ${errors.name ? "show" : ""}`}
+                            >
+                                {errors.name}
+                            </div>
+                        )}
                     </div>
+
                     <div className="form-group">
                         <label htmlFor="email">Email</label>
                         <input
@@ -84,10 +126,22 @@ const RegisterModal = ({ onClose, onRegister, onSwitchToLogin, onSuccess }) => {
                             id="email"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
+                            onBlur={() => handleBlur("email")}
+                            onFocus={() => handleFocus("email")}
                             placeholder="Nhập email của bạn"
                             disabled={isLoading}
                         />
+                        {touched.email && (
+                            <div
+                                className={`error-message ${
+                                    errors.email ? "show" : ""
+                                }`}
+                            >
+                                {errors.email}
+                            </div>
+                        )}
                     </div>
+
                     <div className="form-group">
                         <label htmlFor="password">Mật khẩu</label>
                         <input
@@ -95,10 +149,22 @@ const RegisterModal = ({ onClose, onRegister, onSwitchToLogin, onSuccess }) => {
                             id="password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
+                            onBlur={() => handleBlur("password")}
+                            onFocus={() => handleFocus("password")}
                             placeholder="Nhập mật khẩu"
                             disabled={isLoading}
                         />
+                        {touched.password && (
+                            <div
+                                className={`error-message ${
+                                    errors.password ? "show" : ""
+                                }`}
+                            >
+                                {errors.password}
+                            </div>
+                        )}
                     </div>
+
                     <div className="form-group">
                         <label htmlFor="confirmPassword">Xác nhận mật khẩu</label>
                         <input
@@ -106,11 +172,26 @@ const RegisterModal = ({ onClose, onRegister, onSwitchToLogin, onSuccess }) => {
                             id="confirmPassword"
                             value={confirmPassword}
                             onChange={(e) => setConfirmPassword(e.target.value)}
+                            onBlur={() => handleBlur("confirmPassword")}
+                            onFocus={() => handleFocus("confirmPassword")}
                             placeholder="Nhập lại mật khẩu"
                             disabled={isLoading}
                         />
+                        {touched.confirmPassword && (
+                            <div
+                                className={`error-message ${
+                                    errors.confirmPassword ? "show" : ""
+                                }`}
+                            >
+                                {errors.confirmPassword}
+                            </div>
+                        )}
                     </div>
-                    {error && <div className="error-message">{error}</div>}
+
+                    {errors.global && (
+                        <div className="error-message show">{errors.global}</div>
+                    )}
+
                     <button
                         type="submit"
                         className="submit-button"
